@@ -1,9 +1,10 @@
-import chess_game.game
+from chess_game import game
 
 
 def main():
-    chess_game.game.Game()
+    game.Game()
 
 
 
 main()
+
