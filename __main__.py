@@ -1,5 +1,9 @@
+import chess_game.game
+
+
 def main():
-    pass
+    chess_game.game.Game()
+
 
 
 main()

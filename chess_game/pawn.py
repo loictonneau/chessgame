@@ -1,4 +1,4 @@
-from . import pieces
+from chess_game import pieces
 
 
 class Pawn(pieces.Piece):
