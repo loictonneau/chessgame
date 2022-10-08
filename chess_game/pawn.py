@@ -1,4 +1,4 @@
-from chess_game import pieces,constants
+from chess_game import pieces, constants
 
 
 class Pawn(pieces.Piece):
@@ -14,23 +14,23 @@ class Pawn(pieces.Piece):
 
         if self.color == "white":# si le pion est blanc il avance en retranchant 1 au ligne
 
-            if row > 0:  # avance d'une case (vers le haut) si elle est vide
+            if row - 1 >= 0:  # avance d'une case si elle est vide
                 piece = pieces.find_piece(list_pieces, row - 1, column)
                 if piece.type is None:
                     self.available_moves.append([row - 1, column])
 
-                    if self.first_move:  # avance de deux case (vers le haut) si c'est son premier coup et que cette case est vide
+                    if self.first_move:  # avance de deux case si c'est son premier coup et que cette case est vide
                         piece = pieces.find_piece(list_pieces, row - 2, column)
                         if piece.type is None:
                             self.available_moves.append([row - 2, column])
 
-                if column > 0:  # mange une piece adverse en diagonal ( version gauche )
+                if column - 1 >= 0:  # mange une piece adverse en diagonal ( version gauche )
                     piece = pieces.find_piece(list_pieces, row - 1, column - 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
                             self.available_moves.append([row - 1, column - 1])
 
-                if column < constants.column - 1:  # mange une piece adverse en diagonal ( version droite )
+                if column + 1 > constants.column:  # mange une piece adverse en diagonal ( version droite )
                     piece = pieces.find_piece(list_pieces, row - 1, column + 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
@@ -38,23 +38,23 @@ class Pawn(pieces.Piece):
 
         if self.color == "black":  # si le pion est noir il avance en ajoutant 1 au ligne
 
-            if row < constants.row - 1:  # avance d'une case (vers le bas) si elle est vide
+            if row + 1 > constants.row:  # avance d'une case si elle est vide
                 piece = pieces.find_piece(list_pieces, row + 1, column)
                 if piece.type is None:
                     self.available_moves.append([row + 1, column])
 
-                    if self.first_move:  # avance de deux case (vers le bas) si c'est son premier coup et que cette case est vide
+                    if self.first_move:  # avance de deux case si c'est son premier coup et que cette case est vide
                         piece = pieces.find_piece(list_pieces, row + 2, column)
                         if piece.type is None:
                             self.available_moves.append([row + 2, column])
 
-                if column > 0:  # mange une piece adverse en diagonal ( version gauche )
+                if column - 1 >= 0:  # mange une piece adverse en diagonal ( version gauche )
                     piece = pieces.find_piece(list_pieces, row + 1, column - 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
                             self.available_moves.append([row + 1, column - 1])
 
-                if column < constants.column - 1:  # mange une piece adverse en diagonal ( version droite )
+                if column + 1 > constants.column:  # mange une piece adverse en diagonal ( version droite )
                     piece = pieces.find_piece(list_pieces, row + 1, column + 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
