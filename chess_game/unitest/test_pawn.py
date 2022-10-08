@@ -19,11 +19,9 @@ class PawnTestCase(unittest.TestCase):
         board[4][4] = pawn.Pawn("pawn", "white", [4, 4])
         board[3][3] = pawn.Pawn("pawn", "black", [3, 3])
         board[3][5] = pawn.Pawn("pawn", "black", [3, 5])
-        self.assertListEqual(pawn.Pawn.get_available_move(board[4][4], board), [[3, 4], [2, 4], [3, 3], [3, 5]])
-        board[4][4] = pawn.Pawn("pawn", "black", [4, 4])
-        board[5][5] = pawn.Pawn("pawn", "white", [5, 5])
-        board[3][5] = pawn.Pawn("pawn", "white", [5, 3])
-        self.assertListEqual(pawn.Pawn.get_available_move(board[4][4], board), [[5, 4], [6, 4], [5, 3], [5, 5]])
+        result = pawn.Pawn.get_available_move(board[4][4], board)
+        self.assertListEqual(result, [[3, 4], [2, 4], [3, 3], [3, 5]])
+
 
 
 if __name__ == '__main__':
