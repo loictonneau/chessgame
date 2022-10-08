@@ -1,4 +1,4 @@
-from . import pieces,constants
+from . import pieces, constants
 
 
 class Knight(pieces.Piece):
@@ -13,9 +13,9 @@ class Knight(pieces.Piece):
 
         # le cavalier peut bouger sur 8 case differente
         if row - 2 >= 0 and column + 1 < constants.column:
-            piece = pieces.find_piece(list_pieces,row-2,column+1)
+            piece = pieces.find_piece(list_pieces, row - 2, column + 1)
             if self.color is not piece.color:
-                self.available_moves.append([row-2,column+1])
+                self.available_moves.append([row - 2, column + 1])
 
         if row - 2 >= 0 and column - 1 >= 0:
             piece = pieces.find_piece(list_pieces, row - 2, column - 1)
@@ -37,7 +37,7 @@ class Knight(pieces.Piece):
             if self.color is not piece.color:
                 self.available_moves.append([row - 1, column + 2])
 
-        if row - 1 >= 0 and column -2 >= 0:
+        if row - 1 >= 0 and column - 2 >= 0:
             piece = pieces.find_piece(list_pieces, row - 1, column - 2)
             if self.color is not piece.color:
                 self.available_moves.append([row - 1, column - 2])
@@ -47,11 +47,9 @@ class Knight(pieces.Piece):
             if self.color is not piece.color:
                 self.available_moves.append([row + 1, column + 2])
 
-        if row + 1 < constants.row and column -2 >= 0:
+        if row + 1 < constants.row and column - 2 >= 0:
             piece = pieces.find_piece(list_pieces, row + 1, column - 2)
             if self.color is not piece.color:
                 self.available_moves.append([row + 1, column - 2])
 
-
         return self.available_moves
-
