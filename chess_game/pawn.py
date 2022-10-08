@@ -1,4 +1,4 @@
-from chess_game import pieces, constants
+from chess_game import pieces
 
 
 class Pawn(pieces.Piece):
@@ -39,7 +39,7 @@ class Pawn(pieces.Piece):
         if self.color == "black":  # si le pion est noir il avance en ajoutant 1 au ligne
 
             if row + 1 >= 0:  # avance d'une case si elle est vide
-                piece = pieces.pieces.find_piece(list_pieces, row + 1, column)
+                piece = pieces.find_piece(list_pieces, row + 1, column)
                 if piece.type is None:
                     self.available_move.append([row + 1, column])
 
