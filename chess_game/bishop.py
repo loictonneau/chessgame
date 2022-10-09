@@ -1,3 +1,4 @@
+import chess_game.tools
 from . import pieces, constants
 
 
@@ -15,7 +16,7 @@ class Bishop(pieces.Piece):
             for row_up in range(row + 1, constants.row):
                 for column_rignt in range(column + 1, constants.column):
                     if abs(row_up - row) == abs(column_rignt - column):
-                        piece = pieces.find_piece(list_pieces, row_up, column_rignt)
+                        piece = chess_game.tools.find_piece(list_pieces, row_up, column_rignt)
                         if self.color != piece.color:
                             self.available_moves.append([row_up, column_rignt])
 
@@ -23,7 +24,7 @@ class Bishop(pieces.Piece):
             for row_down in range(row - 1, -1, -1):
                 for column_rignt in range(column + 1, constants.column):
                     if abs(row_down - row) == abs(column_rignt - column):
-                        piece = pieces.find_piece(list_pieces, row_down, column_rignt)
+                        piece = chess_game.tools.find_piece(list_pieces, row_down, column_rignt)
                         if self.color != piece.color:
                             self.available_moves.append([row_down, column_rignt])
 
@@ -31,7 +32,7 @@ class Bishop(pieces.Piece):
             for row_down in range(row - 1, -1, -1):
                 for column_rignt in range(column - 1, -1, -1):
                     if abs(row_down - row) == abs(column_rignt - column):
-                        piece = pieces.find_piece(list_pieces, row_down, column_rignt)
+                        piece = chess_game.tools.find_piece(list_pieces, row_down, column_rignt)
                         if self.color != piece.color:
                             self.available_moves.append([row_down, column_rignt])
 
@@ -39,7 +40,7 @@ class Bishop(pieces.Piece):
             for row_down in range(row - 1, constants.row):
                 for column_rignt in range(column - 1, -1, -1):
                     if abs(row_down - row) == abs(column_rignt - column):
-                        piece = pieces.find_piece(list_pieces, row_down, column_rignt)
+                        piece = chess_game.tools.find_piece(list_pieces, row_down, column_rignt)
                         if self.color != piece.color:
                             self.available_moves.append([row_down, column_rignt])
 

@@ -1,4 +1,5 @@
 import chess_game.game
+import chess_game.tools
 from chess_game import pieces, constants
 
 
@@ -16,23 +17,23 @@ class Pawn(pieces.Piece):
         if self.color == "white":# si le pion est blanc il avance en retranchant 1 au ligne
 
             if row - 1 >= 0:  # avance d'une case si elle est vide
-                piece = pieces.find_piece(list_pieces, row - 1, column)
+                piece = chess_game.tools.find_piece(list_pieces, row - 1, column)
                 if piece.type is None:
                     self.available_moves.append([row - 1, column])
 
                     if self.first_move:  # avance de deux case si c'est son premier coup et que cette case est vide
-                        piece = pieces.find_piece(list_pieces, row - 2, column)
+                        piece = chess_game.tools.find_piece(list_pieces, row - 2, column)
                         if piece.type is None:
                             self.available_moves.append([row - 2, column])
 
                 if column - 1 >= 0:  # mange une piece adverse en diagonal ( version gauche )
-                    piece = pieces.find_piece(list_pieces, row - 1, column - 1)
+                    piece = chess_game.tools.find_piece(list_pieces, row - 1, column - 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
                             self.available_moves.append([row - 1, column - 1])
 
                 if column + 1 < constants.column - 1:  # mange une piece adverse en diagonal ( version droite )
-                    piece = pieces.find_piece(list_pieces, row - 1, column + 1)
+                    piece = chess_game.tools.find_piece(list_pieces, row - 1, column + 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
                             self.available_moves.append([row - 1, column + 1])
@@ -40,23 +41,23 @@ class Pawn(pieces.Piece):
         if self.color == "black":  # si le pion est noir il avance en ajoutant 1 au ligne
 
             if row + 1 < constants.row - 1:  # avance d'une case si elle est vide
-                piece = pieces.find_piece(list_pieces, row + 1, column)
+                piece = chess_game.tools.find_piece(list_pieces, row + 1, column)
                 if piece.type is None:
                     self.available_moves.append([row + 1, column])
 
                     if self.first_move:  # avance de deux case si c'est son premier coup et que cette case est vide
-                        piece = pieces.find_piece(list_pieces, row + 2, column)
+                        piece = chess_game.tools.find_piece(list_pieces, row + 2, column)
                         if piece.type is None:
                             self.available_moves.append([row + 2, column])
 
                 if column - 1 >= 0:  # mange une piece adverse en diagonal ( version gauche )
-                    piece = pieces.find_piece(list_pieces, row + 1, column - 1)
+                    piece = chess_game.tools.find_piece(list_pieces, row + 1, column - 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
                             self.available_moves.append([row + 1, column - 1])
 
                 if column + 1 < constants.column - 1:  # mange une piece adverse en diagonal ( version droite )
-                    piece = pieces.find_piece(list_pieces, row + 1, column + 1)
+                    piece = chess_game.tools.find_piece(list_pieces, row + 1, column + 1)
                     if piece.type is not None:
                         if self.color is not piece.color:
                             self.available_moves.append([row + 1, column + 1])
