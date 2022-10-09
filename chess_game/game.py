@@ -47,8 +47,8 @@ class Game:
                         self.piece_list.append(king.King("king", "white", [each_row,each_case]))
 
 
-    def select(self, coordonate):
-        piece = tools.find_piece(self.piece_list, coordonate[0],coordonate[1])
+    def select(self, position):  # selectionne une pièce en fonction de a position et montre ces coups possibles
+        piece = tools.find_piece(self.piece_list, position[0], position[1])
         if piece.type is None:
             return print("pas de piece a l'endroit choisie")
         elif self.turn != piece.color:
@@ -58,5 +58,5 @@ class Game:
         else:
             self.selected = piece
             self.valid_moves = piece.get_available_moves(self.piece_list)
-            tools.affichage_valid_move(self.selected)
+            tools.print_available_moves(self.selected)
             return piece

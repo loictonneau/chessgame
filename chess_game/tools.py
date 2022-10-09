@@ -56,49 +56,48 @@ def draw_board(list):  # affiche les pieces sur un echequier
 
     # mise en forme des bord du tableau
     letter = ("A ", "B ", "C ", "D ", "E ", "F ", "G ", "H ")
-    #letter_ = (0, 1, 2, 3, 4, 5, 6, 7)
+    # letter_ = (0, 1, 2, 3, 4, 5, 6, 7)
     print("    1    2    3    4    5    6    7    8 ")
-    #print("    0    1    2    3    4    5    6    7 ")
+    # print("    0    1    2    3    4    5    6    7 ")
     for each_line in range(len(board)):
         print(str(letter[each_line]) + str(board[each_line]))
 
 
-def convert_coordonate(coordonate):  # permet de passer des coordonnées alphanumerique a des coordonnées numeriques
+def convert_coordonate(position):  # permet de passer des coordonnées alphanumerique a des coordonnées numeriques
     letter = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7}
-    choice_piece_list = list(coordonate)
-    choice_piece_list[0] = letter.get(choice_piece_list[0])
-    choice_piece_list[1] = int(choice_piece_list[1]) - 1
-    return choice_piece_list
+    position = list(position)
+    position[0] = letter.get(position[0])
+    position[1] = int(position[1]) - 1
+    return position
 
 
+def print_available_moves(piece):  # permet de passer des coordonnées numerique a des coordonnées alphanumerique
+    available_moves = []
+    for available_move in piece.available_moves:
+        available_move = list(available_move)
+        if available_move[0] == 0:
+            available_move[0] = "A"
+        if available_move[0] == 1:
+            available_move[0] = "B"
+        if available_move[0] == 2:
+            available_move[0] = "C"
+        if available_move[0] == 3:
+            available_move[0] = "D"
+        if available_move[0] == 4:
+            available_move[0] = "E"
+        if available_move[0] == 5:
+            available_move[0] = "F"
+        if available_move[0] == 6:
+            available_move[0] = "G"
+        if available_move[0] == 7:
+            available_move[0] = "H"
+        available_move[1] = str(available_move[1] + 1)
+        available_move = available_move[0] + available_move[1]
+        available_moves.append(available_move)
+    print(f"les case disponible sont {available_moves}")
 
-def affichage_valid_move(piece):
-    valeur = []
-    for values in piece.available_moves:
-        values = list(values)
-        if values[0] == 0:
-            values[0] = "A"
-        if values[0] == 1:
-            values[0] = "B"
-        if values[0] == 2:
-            values[0] = "C"
-        if values[0] == 3:
-            values[0] = "D"
-        if values[0] == 4:
-            values[0] = "E"
-        if values[0] == 5:
-            values[0] = "F"
-        if values[0] == 6:
-            values[0] = "G"
-        if values[0] == 7:
-            values[0] = "H"
-        values[1] = str(values[1] + 1)
-        values = values[0] + values[1]
-        valeur.append(values)
-    print(f"les case disponible sont {valeur}")
 
-
-def find_piece(list_pieces, row, colum):
+def find_piece(list_pieces, row, colum):  # trouve une piece en fonction de ces coordonnées
     for piece in list_pieces:
         if piece.position == [row, colum]:
             return piece
