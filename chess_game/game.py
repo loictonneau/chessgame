@@ -47,16 +47,33 @@ class Game:
                         self.piece_list.append(king.King("king", "white", [each_row,each_case]))
 
 
-    def select(self, position):  # selectionne une pièce en fonction de a position et montre ces coups possibles
-        piece = tools.find_piece(self.piece_list, position[0], position[1])
-        if piece.type is None:
-            return print("pas de piece a l'endroit choisie")
-        elif self.turn != piece.color:
-            return print("cette piece ne vous appartient pas")
-        elif len(piece.get_available_moves(self.piece_list)) <= 0:
-            return print("cette piece en peut pas bouger")
+    def select_piece(self, position):  # selectionne une pièce en fonction de a position et montre ces coups possibles
+        if not (position[0] in range(0,constants.row) and position[1] in range(0,constants.column)) or len(position) != 2:
+            return print("coordonnées non valide")
+
         else:
-            self.selected = piece
-            self.valid_moves = piece.get_available_moves(self.piece_list)
-            tools.print_available_moves(self.selected)
-            return piece
+            piece = tools.find_piece(self.piece_list, position[0], position[1])
+
+            if piece.type is None:
+                return print("pas de piece a l'endroit choisie")
+
+            elif self.turn != piece.color:
+                return print("cette piece ne vous appartient pas")
+
+            elif len(piece.get_available_moves(self.piece_list)) <= 0:
+                return print("cette piece en peut pas bouger")
+
+            else:
+                self.selected = piece
+                self.valid_moves = piece.get_available_moves(self.piece_list)
+                tools.convert_num_to_alpha(self.selected)
+                return piece
+
+    def select_destination(self, position):  # selectionne une case vide
+        if not (position[0] in range(0,constants.row) and position[1] in range(0,constants.column)) or len(position) != 2:
+            return print("coordonnées non valide")
+
+        elif position not in self.valid_moves :
+            return print("vous ne pouvez pas bouger cette piece ici ")
+        else:
+            pass

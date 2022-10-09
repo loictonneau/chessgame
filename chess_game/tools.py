@@ -63,7 +63,7 @@ def draw_board(list):  # affiche les pieces sur un echequier
         print(str(letter[each_line]) + str(board[each_line]))
 
 
-def convert_coordonate(position):  # permet de passer des coordonnées alphanumerique a des coordonnées numeriques
+def convert_alpha_to_num(position):  # permet de passer des coordonnées alphanumerique a des coordonnées numeriques
     letter = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7}
     position = list(position)
     position[0] = letter.get(position[0])
@@ -71,7 +71,7 @@ def convert_coordonate(position):  # permet de passer des coordonnées alphanume
     return position
 
 
-def print_available_moves(piece):  # permet de passer des coordonnées numerique a des coordonnées alphanumerique
+def convert_num_to_alpha(piece):  # permet de passer des coordonnées numerique a des coordonnées alphanumerique
     available_moves = []
     for available_move in piece.available_moves:
         available_move = list(available_move)
@@ -97,7 +97,7 @@ def print_available_moves(piece):  # permet de passer des coordonnées numerique
     print(f"les case disponible sont {available_moves}")
 
 
-def find_piece(list_pieces, row, colum):  # trouve une piece en fonction de ces coordonnées
+def find_piece(list_pieces, row, column):  # trouve une piece en fonction de ces coordonnées
     for piece in list_pieces:
-        if piece.position == [row, colum]:
+        if piece.position == [row, column]:
             return piece
