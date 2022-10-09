@@ -1,5 +1,5 @@
-import chess_game.tools
-from . import pieces, constants
+
+from . import pieces, constants, tools
 
 
 class Knight(pieces.Piece):
@@ -14,42 +14,42 @@ class Knight(pieces.Piece):
 
         # le cavalier peut bouger sur 8 case differente
         if row - 2 >= 0 and column + 1 < constants.column - 1:
-            piece = chess_game.tools.find_piece(list_pieces, row - 2, column + 1)
+            piece = tools.find_piece(list_pieces, row - 2, column + 1)
             if self.color is not piece.color:
                 self.available_moves.append([row - 2, column + 1])
 
         if row - 2 >= 0 and column - 1 >= 0:
-            piece = chess_game.tools.find_piece(list_pieces, row - 2, column - 1)
+            piece = tools.find_piece(list_pieces, row - 2, column - 1)
             if self.color is not piece.color:
                 self.available_moves.append([row - 2, column - 1])
 
         if row + 2 < constants.row - 1 and column + 1 < constants.column - 1:
-            piece = chess_game.tools.find_piece(list_pieces, row + 2, column + 1)
+            piece = tools.find_piece(list_pieces, row + 2, column + 1)
             if self.color is not piece.color:
                 self.available_moves.append([row + 2, column + 1])
 
         if row + 2 < constants.row - 1 and column - 1 >= 0:
-            piece = chess_game.tools.find_piece(list_pieces, row + 2, column - 1)
+            piece = tools.find_piece(list_pieces, row + 2, column - 1)
             if self.color is not piece.color:
                 self.available_moves.append([row + 2, column - 1])
 
         if row - 1 >= 0 and column + 2 < constants.column - 1:
-            piece = chess_game.tools.find_piece(list_pieces, row - 1, column + 2)
+            piece = tools.find_piece(list_pieces, row - 1, column + 2)
             if self.color is not piece.color:
                 self.available_moves.append([row - 1, column + 2])
 
         if row - 1 >= 0 and column - 2 >= 0:
-            piece = chess_game.tools.find_piece(list_pieces, row - 1, column - 2)
+            piece = tools.find_piece(list_pieces, row - 1, column - 2)
             if self.color is not piece.color:
                 self.available_moves.append([row - 1, column - 2])
 
         if row + 1 < constants.row - 1 and column + 2 < constants.column - 1:
-            piece = chess_game.tools.find_piece(list_pieces, row + 1, column + 2)
+            piece = tools.find_piece(list_pieces, row + 1, column + 2)
             if self.color is not piece.color:
                 self.available_moves.append([row + 1, column + 2])
 
         if row + 1 < constants.row - 1 and column - 2 >= 0:
-            piece = chess_game.tools.find_piece(list_pieces, row + 1, column - 2)
+            piece = tools.find_piece(list_pieces, row + 1, column - 2)
             if self.color is not piece.color:
                 self.available_moves.append([row + 1, column - 2])
 

@@ -1,5 +1,5 @@
 
-from chess_game import game,tools
+from chess_game import game, tools
 
 
 def main():
@@ -8,7 +8,6 @@ def main():
     end = False
     while not end:
         tools.draw_board(current_game.piece_list)
-        print(f"les blanc ont {current_game.white_pieces_left} pieces restante, les noirs ont {current_game.black_pieces_left} pieces restante")
         print(f"au tour des {current_game.turn}")
 
         piece_to_move = None
@@ -18,11 +17,7 @@ def main():
         destination_case = None
         while destination_case is None:
             destination_case = current_game.select_destination(tools.convert_alpha_to_num(input("ou voulez vous aller ?").upper()))
-        current_game.move(piece_to_move,destination_case)
-
-
-
+        current_game.move(piece_to_move, destination_case)
 
 
 main()
-

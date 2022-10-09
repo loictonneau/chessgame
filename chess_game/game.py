@@ -17,40 +17,39 @@ class Game:
                 # place les piece en debut de partie
                 if each_row == 0:
                     if each_case == 0 or each_case == 7:
-                        self.piece_list.append(rook.Rook("rook", "black", [each_row,each_case]))
+                        self.piece_list.append(rook.Rook("rook", "black", [each_row, each_case]))
                     elif each_case == 1 or each_case == 6:
-                        self.piece_list.append(knight.Knight("knight", "black", [each_row,each_case]))
+                        self.piece_list.append(knight.Knight("knight", "black", [each_row, each_case]))
                     elif each_case == 2 or each_case == 5:
-                        self.piece_list.append(bishop.Bishop("bishop", "black", [each_row,each_case]))
+                        self.piece_list.append(bishop.Bishop("bishop", "black", [each_row, each_case]))
                     elif each_case == 3:
-                        self.piece_list.append(queen.Queen("queen", "black", [each_row,each_case]))
+                        self.piece_list.append(queen.Queen("queen", "black", [each_row, each_case]))
                     elif each_case == 4:
-                        self.piece_list.append(king.King("king", "black", [each_row,each_case]))
+                        self.piece_list.append(king.King("king", "black", [each_row, each_case]))
 
                 if each_row == 1:
-                    self.piece_list.append(pawn.Pawn("pawn", "black", [each_row,each_case]))
+                    self.piece_list.append(pawn.Pawn("pawn", "black", [each_row, each_case]))
 
                 if 2 <= each_row <= 5:
-                    self.piece_list.append(pieces.Piece(None, None, [each_row,each_case]))
+                    self.piece_list.append(pieces.Piece(None, None, [each_row, each_case]))
 
                 if each_row == 6:
-                    self.piece_list.append(pawn.Pawn("pawn", "white", [each_row,each_case]))
+                    self.piece_list.append(pawn.Pawn("pawn", "white", [each_row, each_case]))
 
                 if each_row == 7:
                     if each_case == 0 or each_case == 7:
-                        self.piece_list.append(rook.Rook("rook", "white", [each_row,each_case]))
+                        self.piece_list.append(rook.Rook("rook", "white", [each_row, each_case]))
                     elif each_case == 1 or each_case == 6:
-                        self.piece_list.append(knight.Knight("knight", "white", [each_row,each_case]))
+                        self.piece_list.append(knight.Knight("knight", "white", [each_row, each_case]))
                     elif each_case == 2 or each_case == 5:
-                        self.piece_list.append(bishop.Bishop("bishop", "white", [each_row,each_case]))
+                        self.piece_list.append(bishop.Bishop("bishop", "white", [each_row, each_case]))
                     elif each_case == 3:
-                        self.piece_list.append(queen.Queen("queen", "white", [each_row,each_case]))
+                        self.piece_list.append(queen.Queen("queen", "white", [each_row, each_case]))
                     elif each_case == 4:
-                        self.piece_list.append(king.King("king", "white", [each_row,each_case]))
-
+                        self.piece_list.append(king.King("king", "white", [each_row, each_case]))
 
     def select_piece(self, position):  # selectionne une pièce en fonction de a position et montre ces coups possibles
-        if not (position[0] in range(0,constants.row) and position[1] in range(0,constants.column)) or len(position) != 2:
+        if not (position[0] in range(0, constants.row) and position[1] in range(0, constants.column)) or len(position) != 2:
             return print("coordonnées non valide")
 
         else:
@@ -75,13 +74,13 @@ class Game:
         if not (destination[0] in range(0, constants.row) and destination[1] in range(0, constants.column)) or len(destination) != 2:
             return print("coordonnées non valide")
 
-        elif destination not in self.valid_moves :
+        elif destination not in self.valid_moves:
             return print("vous ne pouvez pas bouger cette piece ici ")
         else:
             return destination
 
-    def first_move_done(self,piece):  # change la possibilité des coups speciaux lié au premier deplacement
-        if piece.type in ("pawn","rook","king"):
+    def first_move_done(self, piece):  # change la possibilité des coups speciaux lié au premier deplacement
+        if piece.type in ("pawn", "rook", "king"):
             piece.first_move = False
 
     def change_turn(self):  # passe a joueur suivant
@@ -90,14 +89,14 @@ class Game:
         else:
             self.turn = "white"
 
-    def piece_die(self,piece_removed): #  enleve 1 au compte restant du nombre de pieces
+    def piece_die(self, piece_removed):  # enleve 1 au compte restant du nombre de pieces
         if piece_removed.color == "black":
             self.black_pieces_left -= 1
         elif piece_removed.color == "white":
             self.white_pieces_left -= 1
 
-    def move(self,piece,destination):  # deplace la piece
-        piece_to_remove = tools.find_piece(self.piece_list,destination[0],destination[1])
+    def move(self, piece, destination):  # deplace la piece
+        piece_to_remove = tools.find_piece(self.piece_list, destination[0], destination[1])
         if piece_to_remove.color is not None:
             self.piece_die(piece_to_remove)
             piece_to_remove.type = None
