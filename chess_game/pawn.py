@@ -9,6 +9,7 @@ class Pawn(pieces.Piece):
         super().__init__(piece_type, color, position)
         self.first_move = True
 
+
     def get_available_moves(self, list_pieces):  # creer une liste avec tout les coups possibles du pion
         self.clear_available_moves()
         row = self.position[0]

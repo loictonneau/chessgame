@@ -8,6 +8,8 @@ class Game:
         self.selected = None
         self.valid_moves = []
         self.piece_list = []
+        self.black_pieces_left = 16
+        self.white_pieces_left = 16
 
         for each_row in range(constants.column):
             for each_case in range(constants.row):
@@ -69,11 +71,39 @@ class Game:
                 tools.convert_num_to_alpha(self.selected)
                 return piece
 
-    def select_destination(self, position):  # selectionne une case vide
-        if not (position[0] in range(0,constants.row) and position[1] in range(0,constants.column)) or len(position) != 2:
+    def select_destination(self, destination):  # selectionne une case vide
+        if not (destination[0] in range(0, constants.row) and destination[1] in range(0, constants.column)) or len(destination) != 2:
             return print("coordonnées non valide")
 
-        elif position not in self.valid_moves :
+        elif destination not in self.valid_moves :
             return print("vous ne pouvez pas bouger cette piece ici ")
         else:
-            pass
+            return destination
+
+    def first_move_done(self,piece):  # change la possibilité des coups speciaux lié au premier deplacement
+        if piece.type in ("pawn","rook","king"):
+            piece.first_move = False
+
+    def change_turn(self):  # passe a joueur suivant
+        if self.turn == "white":
+            self.turn = "black"
+        else:
+            self.turn = "white"
+
+    def piece_die(self,piece_removed): #  enleve 1 au compte restant du nombre de pieces
+        if piece_removed.color == "black":
+            self.black_pieces_left -= 1
+        elif piece_removed.color == "white":
+            self.white_pieces_left -= 1
+
+    def move(self,piece,destination):  # deplace la piece
+        piece_to_remove = tools.find_piece(self.piece_list,destination[0],destination[1])
+        if piece_to_remove.color is not None:
+            self.piece_die(piece_to_remove)
+            piece_to_remove.type = None
+            piece_to_remove.color = None
+        piece_to_remove.position = piece.position
+        piece.position = destination
+
+        self.first_move_done(piece)
+        self.change_turn()

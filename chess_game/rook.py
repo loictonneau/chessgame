@@ -6,6 +6,7 @@ class Rook(pieces.Piece):
 
     def __init__(self, piece_type, color, position):
         super().__init__(piece_type, color, position)
+        self.first_move = True
 
     def get_available_moves(self, list_pieces):  # creer une liste avec tout les coups possibles de la tours
         self.clear_available_moves()
