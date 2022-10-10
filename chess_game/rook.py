@@ -1,4 +1,4 @@
-from chess_game import pieces, constants,game
+from chess_game import pieces, constants, game
 
 
 class Rook(pieces.Piece):
@@ -12,7 +12,7 @@ class Rook(pieces.Piece):
         row = self.position[0]
         column = self.position[1]
 
-        if row + 1 < constants.row - 1:  # ajoute les cases au dessous de la tours tant qu'aucune autre piece n'est trouvée,
+        if row + 1 < constants.row:  # ajoute les cases au dessous de la tours tant qu'aucune autre piece n'est trouvée,
             for row_down in range(row + 1, constants.row):
                 piece = game.find_piece(list_pieces, row_down, column)
                 if piece.type is None:
@@ -34,7 +34,7 @@ class Rook(pieces.Piece):
                 elif self.color is piece.color:
                     break
 
-        if column + 1 < constants.column - 1:  # ajoute les cases a droite de la tours tant qu'aucune autre piece n'est trouvée
+        if column + 1 < constants.column:  # ajoute les cases a droite de la tours tant qu'aucune autre piece n'est trouvée
             for column_right in range(column + 1, constants.column):
                 piece = game.find_piece(list_pieces, row, column_right)
                 if piece.type is None:

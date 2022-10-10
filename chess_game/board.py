@@ -56,9 +56,7 @@ def draw_board(list):  # affiche les pieces sur un echequier
 
     # mise en forme des bord du tableau
     letter = ("A ", "B ", "C ", "D ", "E ", "F ", "G ", "H ")
-    # letter_ = (0, 1, 2, 3, 4, 5, 6, 7)
     print("    1    2    3    4    5    6    7    8 ")
-    # print("    0    1    2    3    4    5    6    7 ")
     for each_line in range(len(board)):
         print(str(letter[each_line]) + str(board[each_line]))
 

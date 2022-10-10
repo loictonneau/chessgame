@@ -17,7 +17,7 @@ class Knight(pieces.Piece):
             if self.color is not piece.color:
                 self.available_moves.append([row - 1, column - 2])
 
-        if row - 2 >= 0 and column - 1 >= 0: # 2 haut 1 gauche
+        if row - 2 >= 0 and column - 1 >= 0:  # 2 haut 1 gauche
             piece = game.find_piece(list_pieces, row - 2, column - 1)
             if self.color is not piece.color:
                 self.available_moves.append([row - 2, column - 1])
