@@ -11,6 +11,19 @@ class Game:
         self.black_pieces_left = 16
         self.white_pieces_left = 16
 
+        # for each_row in range(constants.column):
+        #     for each_case in range(constants.row):
+        #         if each_row == 0 and each_case == 0:
+        #             self.piece_list.append(king.King("king", "black", [each_row, each_case]))
+        #         elif each_row == 7 and each_case == 7:
+        #             self.piece_list.append(king.King("king", "white", [each_row, each_case]))
+        #         elif each_row == 6 and each_case == 1:
+        #             self.piece_list.append(rook.Rook("rook", "white", [each_row, each_case]))
+        #         elif each_row == 7 and each_case == 1:
+        #             self.piece_list.append(rook.Rook("rook", "white", [each_row, each_case]))
+        #         else:
+        #             self.piece_list.append(pieces.Piece(None, None, [each_row, each_case]))
+
         for each_row in range(constants.column):
             for each_case in range(constants.row):
                 # place les piece en debut de partie
@@ -138,7 +151,7 @@ class Game:
                 for enemie_available_move in enemie_available_moves:
                     enemies_available_moves.append(enemie_available_move)
 
-            return enemies_available_moves
+        return enemies_available_moves
 
     def get_all_possible_moves(
             self):  # cree une liste avec tout les coups possibles de toutes les pieces allié sauf le roi
@@ -156,10 +169,10 @@ class Game:
         king_possible_moves = king.get_available_moves(self.piece_list)
         enemies_available_moves = self.get_enemies_available_moves()
         all_available_moves = self.get_all_possible_moves()
-        king_available_moves = comparaison_list("difference",king_possible_moves,enemies_available_moves)
-        meeting_case = comparaison_list("intersection",king_possible_moves,enemies_available_moves)
-        possible_move_to_defend = comparaison_list("inetersection",meeting_case,all_available_moves)#meeting_case.intersection(all_available_moves)
-        if len(king_available_moves) == 0 and len(king_available_moves) != 0 and len(possible_move_to_defend) == 0:
+        king_available_moves = comparaison_list("difference", king_possible_moves, enemies_available_moves)
+        meeting_case = comparaison_list("intersection", king_possible_moves, enemies_available_moves)
+        possible_move_to_defend = comparaison_list("inetersection", meeting_case,all_available_moves)
+        if len(king_available_moves) == 0 and len(king_possible_moves) != 0 and len(possible_move_to_defend) == 0:
             return True
         return False
 
@@ -181,10 +194,10 @@ def find_piece(list, row, column):  # trouve une piece en fonction de ces coordo
             return piece
 
 
-def comparaison_list(action,lst1, lst2):
-    lst3=[]
+def comparaison_list(action, list_1, list_2):
+    difference_list = []
     if action == "intersection":
-        lst3 = [value for value in lst1 if value in lst2]
+        difference_list = [value for value in list_1 if value in list_2]
     if action == "difference":
-        lst3 = [value for value in lst1 if value not in lst2]
-    return lst3
+        difference_list = [value for value in list_1 if value not in list_2]
+    return difference_list
