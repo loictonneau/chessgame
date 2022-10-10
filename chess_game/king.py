@@ -1,4 +1,4 @@
-from . import pieces, constants, tools
+from . import pieces, constants, game
 
 
 class King(pieces.Piece):
@@ -13,43 +13,43 @@ class King(pieces.Piece):
         column = self.position[1]
 
         if row - 1 >= 0:  # avance d'une case vers le bas
-            piece = tools.find_piece(list_pieces, row - 1, column)
+            piece = game.find_piece(list_pieces, row - 1, column)
             if piece.type is None:
                 self.available_moves.append([row - 1, column])
 
         if row + 1 < constants.row - 1:  # avance d'une case vers le haut
-            piece = tools.find_piece(list_pieces, row + 1, column)
+            piece = game.find_piece(list_pieces, row + 1, column)
             if piece.type is None:
                 self.available_moves.append([row + 1, column])
 
         if column - 1 >= 0:  # avance d'une case sur la gauche
-            piece = tools.find_piece(list_pieces, row, column - 1)
+            piece = game.find_piece(list_pieces, row, column - 1)
             if piece.type is None:
                 self.available_moves.append([row, column - 1])
 
         if column + 1 < constants.column - 1:  # avance d'une case sur la droite
-            piece = tools.find_piece(list_pieces, row, column + 1)
+            piece = game.find_piece(list_pieces, row, column + 1)
             if piece.type is None:
                 self.available_moves.append([row, column + 1])
 
         if row - 1 >= 0 and column + 1 < constants.column - 1:  # avance d'une case sur le diagonal S.E.
-            piece = tools.find_piece(list_pieces, row - 1, column + 1)
+            piece = game.find_piece(list_pieces, row - 1, column + 1)
             if piece.type is None:
                 self.available_moves.append([row - 1, column + 1])
 
         if row - 1 >= 0 and column - 1 >= 0:  # avance d'une case sur le diagonal S.O.
-            piece = tools.find_piece(list_pieces, row - 1, column - 1)
+            piece = game.find_piece(list_pieces, row - 1, column - 1)
             if piece.type is None:
                 self.available_moves.append([row - 1, column - 1])
 
         if row + 1 < constants.row - 1 and column + 1 < constants.column - 1:  # avance d'une case sur le diagonal N.E.
-            piece = tools.find_piece(list_pieces, row - 1, column + 1)
+            piece = game.find_piece(list_pieces, row + 1, column - 1)
             if piece.type is None:
-                self.available_moves.append([row - 1, column + 1])
+                self.available_moves.append([row + 1, column - 1])
 
         if row + 1 < constants.row - 1 and column - 1 >= 0:  # avance d'une case sur le diagonal N.O.
-            piece = tools.find_piece(list_pieces, row - 1, column - 1)
+            piece = game.find_piece(list_pieces, row + 1, column - 1)
             if piece.type is None:
-                self.available_moves.append([row - 1, column - 1])
+                self.available_moves.append([row + 1, column - 1])
 
         return self.available_moves

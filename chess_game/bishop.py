@@ -1,4 +1,4 @@
-from . import pieces, constants, tools
+from . import pieces, constants, game
 
 
 class Bishop(pieces.Piece):
@@ -6,7 +6,7 @@ class Bishop(pieces.Piece):
     def __init__(self, piece_type, color, position):
         super().__init__(piece_type, color, position)
 
-    def get_available_moves(self, list_pieces):  # creer une liste avec tout les coups possibles du cavalier
+    def get_available_moves(self, list_pieces):  # cree une liste avec tout les coups possibles du cavalier
         self.clear_available_moves()
         row = self.position[0]
         column = self.position[1]
@@ -15,7 +15,7 @@ class Bishop(pieces.Piece):
             for row_up in range(row + 1, constants.row):
                 for column_rignt in range(column + 1, constants.column):
                     if abs(row_up - row) == abs(column_rignt - column):
-                        piece = tools.find_piece(list_pieces, row_up, column_rignt)
+                        piece = game.find_piece(list_pieces, row_up, column_rignt)
                         if self.color != piece.color:
                             self.available_moves.append([row_up, column_rignt])
 
@@ -23,7 +23,7 @@ class Bishop(pieces.Piece):
             for row_down in range(row - 1, -1, -1):
                 for column_rignt in range(column + 1, constants.column):
                     if abs(row_down - row) == abs(column_rignt - column):
-                        piece = tools.find_piece(list_pieces, row_down, column_rignt)
+                        piece = game.find_piece(list_pieces, row_down, column_rignt)
                         if self.color != piece.color:
                             self.available_moves.append([row_down, column_rignt])
 
@@ -31,7 +31,7 @@ class Bishop(pieces.Piece):
             for row_down in range(row - 1, -1, -1):
                 for column_left in range(column - 1, -1, -1):
                     if abs(row_down - row) == abs(column_left - column):
-                        piece = tools.find_piece(list_pieces, row_down, column_left)
+                        piece = game.find_piece(list_pieces, row_down, column_left)
                         if self.color != piece.color:
                             self.available_moves.append([row_down, column_left])
 
@@ -39,7 +39,7 @@ class Bishop(pieces.Piece):
             for row_up in range(row - 1, constants.row):
                 for column_left in range(column - 1, -1, -1):
                     if abs(row_up - row) == abs(column_left - column):
-                        piece = tools.find_piece(list_pieces, row_up, column_left)
+                        piece = game.find_piece(list_pieces, row_up, column_left)
                         if self.color != piece.color:
                             self.available_moves.append([row_up, column_left])
 

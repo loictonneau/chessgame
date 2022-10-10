@@ -95,9 +95,3 @@ def convert_num_to_alpha(piece):  # permet de passer des coordonnées numerique 
         available_move = available_move[0] + available_move[1]
         available_moves.append(available_move)
     print(f"les case disponible sont {available_moves}")
-
-
-def find_piece(list_pieces, row, column):  # trouve une piece en fonction de ces coordonnées
-    for piece in list_pieces:
-        if piece.position == [row, column]:
-            return piece

@@ -1,4 +1,4 @@
-from chess_game import pieces, constants, tools
+from chess_game import pieces, constants,game
 
 
 class Rook(pieces.Piece):
@@ -7,14 +7,14 @@ class Rook(pieces.Piece):
         super().__init__(piece_type, color, position)
         self.first_move = True
 
-    def get_available_moves(self, list_pieces):  # creer une liste avec tout les coups possibles de la tours
+    def get_available_moves(self, list_pieces):  # cree une liste avec tout les coups possibles de la tours
         self.clear_available_moves()
         row = self.position[0]
         column = self.position[1]
 
         if row + 1 < constants.row - 1:  # ajoute les cases au dessous de la tours tant qu'aucune autre piece n'est trouvée,
             for row_down in range(row + 1, constants.row):
-                piece = tools.find_piece(list_pieces, row_down, column)
+                piece = game.find_piece(list_pieces, row_down, column)
                 if piece.type is None:
                     self.available_moves.append([row_down, column])
                 elif self.color is not piece.color:  # ajoute la case si une piece adverse est trouvée puis arrete la recherche sinon arrete directement la recherche
@@ -25,7 +25,7 @@ class Rook(pieces.Piece):
 
         if row - 1 >= 0:  # ajoute les cases au dessus de la tours tant qu'aucune autre piece n'est trouvée
             for row_up in range(row - 1, -1, -1):
-                piece = tools.find_piece(list_pieces, row_up, column)
+                piece = game.find_piece(list_pieces, row_up, column)
                 if piece.type is None:
                     self.available_moves.append([row_up, column])
                 elif self.color is not piece.color:  # ajoute la case si une piece adverse est trouvée puis arrete la recherche sinon arrete directement la recherche
@@ -36,7 +36,7 @@ class Rook(pieces.Piece):
 
         if column + 1 < constants.column - 1:  # ajoute les cases a droite de la tours tant qu'aucune autre piece n'est trouvée
             for column_right in range(column + 1, constants.column):
-                piece = tools.find_piece(list_pieces, row, column_right)
+                piece = game.find_piece(list_pieces, row, column_right)
                 if piece.type is None:
                     self.available_moves.append([row, column_right])
                 elif self.color is not piece.color:  # ajoute la case si une piece adverse est trouvée puis arrete la recherche sinon arrete directement la recherche
@@ -47,7 +47,7 @@ class Rook(pieces.Piece):
 
         if column - 1 >= 0:  # ajoute les cases a gauche de la tours tant qu'aucune autre piece n'est trouvée,
             for column_left in range(column - 1, -1, -1):
-                piece = tools.find_piece(list_pieces, row, column_left)
+                piece = game.find_piece(list_pieces, row, column_left)
                 if piece.type is None:
                     self.available_moves.append([row, column_left])
                 elif self.color is not piece.color:  # ajoute la case si une piece adverse est trouvée puis arrete la recherche sinon arrete directement la recherche
