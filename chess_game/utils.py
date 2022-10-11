@@ -1,7 +1,7 @@
 from chess_game import pieces
 
 
-def find_piece(list: list, row: int, column: int) -> pieces.Piece:
+def find_piece(list: list, row: int, column: int):
     """trouve une piece en fonction de ces coordonnées"""
 
     for piece in list:

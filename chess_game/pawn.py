@@ -3,12 +3,11 @@ from chess_game import pieces, utils, constants
 
 class Pawn(pieces.Piece):
 
-    def __init__(self, piece_type: str, color: str, position: list[int, int]):
+    def __init__(self, piece_type: str, color: str, position: list):
         super().__init__(piece_type, color, position)
         self.first_move = True
 
-    def get_available_moves(self, list_pieces: list[pieces.Piece]) \
-            -> tuple[list[list[int, int]], list[list[list[int, int]]]]:
+    def get_available_moves(self, list_pieces: list) -> tuple:
         """
         cree un tuple contenant :
             une liste des coordonnée de tous les coups possibles du pion \n

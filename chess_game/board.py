@@ -1,7 +1,7 @@
 from chess_game import constants, pieces
 
 
-def draw_board(list: list[pieces.Piece]):
+def draw_board(list: list):
     """affiche les pieces sur un echequier"""
 
     board = []
@@ -103,7 +103,7 @@ def convert_alpha_to_num(position: str) -> list:
     return position
 
 
-def convert_num_to_alpha(piece: pieces.Piece):
+def convert_num_to_alpha(piece):
     """permet de passer des coordonnées numeriques a des coordonnées alphanumeriques"""
     available_moves = []
     for available_move in piece.available_moves:
