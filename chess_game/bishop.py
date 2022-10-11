@@ -1,3 +1,4 @@
+import itertools
 from chess_game import pieces, utils, constants
 
 
@@ -19,14 +20,12 @@ class Bishop(pieces.Piece):
         row = self.position[0]
         column = self.position[1]
 
-        # ajoute les cases de la diagonal haut gauche du fou jusqua ce qu'une autre piece ne sois trouvée
+        if row >= 1:
 
-        if row - 1 >= 0 and column - 1 >= 0:
+            if column >= 1:
 
-            available_moves_by_direction = []
-            for row_down in range(row - 1, -1, -1):
-
-                for column_left in range(column - 1, -1, -1):
+                available_moves_by_direction = []
+                for row_down, column_left in itertools.product(range(row - 1, -1, -1), range(column - 1, -1, -1)):
 
                     if abs(row_down - row) == abs(column_left - column):
 
@@ -36,26 +35,24 @@ class Bishop(pieces.Piece):
                             self.available_moves.append([row_down, column_left])
                             available_moves_by_direction.append([row_down, column])
 
-            self.available_moves_by_direction.append(available_moves_by_direction)
+                self.available_moves_by_direction.append(available_moves_by_direction)
 
-        # ajoute les cases de la diagonal haut droite du fou jusqua ce qu'une autre piece ne sois trouvée
+            if column + 1 < constants.column:
 
-        if row - 1 >= 0 and column + 1 < constants.column:
+                available_moves_by_direction = []
+                for row_down in range(row - 1, -1, -1):
 
-            available_moves_by_direction = []
-            for row_down in range(row - 1, -1, -1):
+                    for column_rignt in range(column + 1, constants.column):
 
-                for column_rignt in range(column + 1, constants.column):
+                        if abs(row_down - row) == abs(column_rignt - column):
 
-                    if abs(row_down - row) == abs(column_rignt - column):
+                            piece = utils.find_piece(list_pieces, row_down, column_rignt)
+                            if self.color != piece.color:
 
-                        piece = utils.find_piece(list_pieces, row_down, column_rignt)
-                        if self.color != piece.color:
+                                self.available_moves.append([row_down, column_rignt])
+                                available_moves_by_direction.append([row_down, column])
 
-                            self.available_moves.append([row_down, column_rignt])
-                            available_moves_by_direction.append([row_down, column])
-
-            self.available_moves_by_direction.append(available_moves_by_direction)
+                self.available_moves_by_direction.append(available_moves_by_direction)
 
         # ajoute les cases de la diagonal bas droite du fou jusqua ce qu'une autre piece ne sois trouvée
 
@@ -78,20 +75,18 @@ class Bishop(pieces.Piece):
 
         # ajoute les cases de la diagonal bas gauche du fou jusqua ce qu'une autre piece ne sois trouvée
 
-        if row + 1 < constants.row and column - 1 >= 0:
+        if row + 1 < constants.row and column >= 1:
 
             available_moves_by_direction = []
-            for row_up in range(row + 1, constants.row):
+            for row_up, column_left in itertools.product(range(row + 1, constants.row), range(column - 1, -1, -1)):
 
-                for column_left in range(column - 1, -1, -1):
+                if abs(row_up - row) == abs(column_left - column):
 
-                    if abs(row_up - row) == abs(column_left - column):
+                    piece = utils.find_piece(list_pieces, row_up, column_left)
+                    if self.color != piece.color:
 
-                        piece = utils.find_piece(list_pieces, row_up, column_left)
-                        if self.color != piece.color:
-
-                            self.available_moves.append([row_up, column_left])
-                            available_moves_by_direction.append([row_up, column])
+                        self.available_moves.append([row_up, column_left])
+                        available_moves_by_direction.append([row_up, column])
 
             self.available_moves_by_direction.append(available_moves_by_direction)
 

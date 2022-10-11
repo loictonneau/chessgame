@@ -22,99 +22,77 @@ class Pawn(pieces.Piece):
 
         # si le pion est blanc il avance en retranchant 1 au ligne
 
-        if self.color == "white":
+        if self.color == "white" and row >= 1:
+            available_moves_by_direction = []
+            piece = utils.find_piece(list_pieces, row - 1, column)
+            if piece.type is None:
 
-            # avance d'une case si elle est vide
+                self.available_moves.append([row - 1, column])
+                available_moves_by_direction.append([row - 1, column])
 
-            if row - 1 >= 0:
+                # avance de deux case si c'est son premier coup et que cette case est vide
 
-                available_moves_by_direction = []
-                piece = utils.find_piece(list_pieces, row - 1, column)
-                if piece.type is None:
+                if self.first_move:
 
-                    self.available_moves.append([row - 1, column])
-                    available_moves_by_direction.append([row - 1, column])
+                    piece = utils.find_piece(list_pieces, row - 2, column)
+                    if piece.type is None:
 
-                    # avance de deux case si c'est son premier coup et que cette case est vide
+                        self.available_moves.append([row - 2, column])
+                        available_moves_by_direction.append([row - 2, column])
 
-                    if self.first_move:
+            self.available_moves_by_direction.append(available_moves_by_direction)
 
-                        piece = utils.find_piece(list_pieces, row - 2, column)
-                        if piece.type is None:
+            # mange une piece adverse en diagonal ( version gauche )
 
-                            self.available_moves.append([row - 2, column])
-                            available_moves_by_direction.append([row - 2, column])
+            if column >= 1:
 
-                self.available_moves_by_direction.append(available_moves_by_direction)
-
-                # mange une piece adverse en diagonal ( version gauche )
-
-                if column - 1 >= 0:
-
-                    piece = utils.find_piece(list_pieces, row - 1, column - 1)
-                    if piece.type is not None:
-
-                        if self.color is not piece.color:
-
-                            self.available_moves.append([row - 1, column - 1])
+                piece = utils.find_piece(list_pieces, row - 1, column - 1)
+                if piece.type is not None and self.color is not piece.color:
+                    self.available_moves.append([row - 1, column - 1])
 
                 # mange une piece adverse en diagonal ( version droite )
 
-                if column + 1 < constants.column:
+            if column + 1 < constants.column:
 
-                    piece = utils.find_piece(list_pieces, row - 1, column + 1)
-                    if piece.type is not None:
-
-                        if self.color is not piece.color:
-
-                            self.available_moves.append([row - 1, column + 1])
+                piece = utils.find_piece(list_pieces, row - 1, column + 1)
+                if piece.type is not None and self.color is not piece.color:
+                    self.available_moves.append([row - 1, column + 1])
 
         # si le pion est noir il avance en ajoutant 1 au ligne
 
-        if self.color == "black":
+        if self.color == "black" and row + 1 < constants.row:
+            available_moves_by_direction = []
+            piece = utils.find_piece(list_pieces, row + 1, column)
+            if piece.type is None:
 
-            # avance d'une case si elle est vide
+                self.available_moves.append([row + 1, column])
+                available_moves_by_direction.append([row + 1, column])
 
-            if row + 1 < constants.row:
+                # avance de deux case si c'est son premier coup et que cette case est vide
 
-                available_moves_by_direction = []
-                piece = utils.find_piece(list_pieces, row + 1, column)
-                if piece.type is None:
+                if self.first_move:
 
-                    self.available_moves.append([row + 1, column])
-                    available_moves_by_direction.append([row + 1, column])
+                    piece = utils.find_piece(list_pieces, row + 2, column)
+                    if piece.type is None:
 
-                    # avance de deux case si c'est son premier coup et que cette case est vide
+                        self.available_moves.append([row + 2, column])
+                        available_moves_by_direction.append([row + 2, column])
+            self.available_moves_by_direction.append(available_moves_by_direction)
 
-                    if self.first_move:
+            # mange une piece adverse en diagonal ( version gauche )
 
-                        piece = utils.find_piece(list_pieces, row + 2, column)
-                        if piece.type is None:
+            if column >= 1:
 
-                            self.available_moves.append([row + 2, column])
-                            available_moves_by_direction.append([row + 2, column])
-                self.available_moves_by_direction.append(available_moves_by_direction)
-
-                # mange une piece adverse en diagonal ( version gauche )
-
-                if column - 1 >= 0:
-
-                    piece = utils.find_piece(list_pieces, row + 1, column - 1)
-                    if piece.type is not None:
-
-                        if self.color is not piece.color:
-
-                            self.available_moves.append([row + 1, column - 1])
+                piece = utils.find_piece(list_pieces, row + 1, column - 1)
+                if piece.type is not None and self.color is not piece.color:
+                    self.available_moves.append([row + 1, column - 1])
 
                 # mange une piece adverse en diagonal ( version droite )
 
-                if column + 1 < constants.column:
+            if column + 1 < constants.column:
 
-                    piece = utils.find_piece(list_pieces, row + 1, column + 1)
-                    if piece.type is not None:
-
-                        if self.color is not piece.color:
-
-                            self.available_moves.append([row + 1, column + 1])
+                piece = utils.find_piece(list_pieces, row + 1, column + 1)
+                if piece.type is not None and self.color is not piece.color:
+                    self.available_moves.append([row + 1, column + 1])
 
         return self.available_moves, self.available_moves_by_direction

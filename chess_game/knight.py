@@ -19,16 +19,15 @@ class Knight(pieces.Piece):
         row = self.position[0]
         column = self.position[1]
 
-    # le cavalier peut bouger sur 8 case differente
+        # le cavalier peut bouger sur 8 case differente
 
         # 2 gauche 1 haut
 
-        if row - 1 >= 0 and column - 2 >= 0:
+        if row >= 1 and column >= 2:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row - 1, column - 2)
             if self.color is not piece.color:
-
                 self.available_moves.append([row - 1, column - 2])
                 available_moves_by_direction.append([row - 1, column - 2])
 
@@ -36,12 +35,11 @@ class Knight(pieces.Piece):
 
         # 2 haut 1 gauche
 
-        if row - 2 >= 0 and column - 1 >= 0:
+        if row >= 2 and column >= 1:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row - 2, column - 1)
             if self.color is not piece.color:
-
                 self.available_moves.append([row - 2, column - 1])
                 available_moves_by_direction.append([row - 2, column - 1])
 
@@ -49,12 +47,11 @@ class Knight(pieces.Piece):
 
         # 2 haut 1 droite
 
-        if row - 2 >= 0 and column + 1 < constants.column:
+        if row >= 2 and column + 1 < constants.column:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row - 2, column + 1)
             if self.color is not piece.color:
-
                 self.available_moves.append([row - 2, column + 1])
                 available_moves_by_direction.append([row - 2, column - 1])
 
@@ -62,12 +59,11 @@ class Knight(pieces.Piece):
 
         # 2 droite 1 haut
 
-        if row - 1 >= 0 and column + 2 < constants.column:
+        if row >= 1 and column + 2 < constants.column:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row - 1, column + 2)
             if self.color is not piece.color:
-
                 self.available_moves.append([row - 1, column + 2])
                 available_moves_by_direction.append([row - 1, column + 2])
 
@@ -80,7 +76,6 @@ class Knight(pieces.Piece):
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row + 1, column + 2)
             if self.color is not piece.color:
-
                 self.available_moves.append([row + 1, column + 2])
                 available_moves_by_direction.append([row + 1, column + 2])
 
@@ -93,7 +88,6 @@ class Knight(pieces.Piece):
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row + 2, column + 1)
             if self.color is not piece.color:
-
                 self.available_moves.append([row + 2, column + 1])
                 available_moves_by_direction.append([row + 2, column + 1])
 
@@ -101,12 +95,11 @@ class Knight(pieces.Piece):
 
         # 2 bas 1 gauche
 
-        if row + 2 < constants.row and column - 1 >= 0:
+        if row + 2 < constants.row and column >= 1:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row + 2, column - 1)
             if self.color is not piece.color:
-
                 self.available_moves.append([row + 2, column - 1])
                 available_moves_by_direction.append([row + 2, column - 1])
 
@@ -114,12 +107,11 @@ class Knight(pieces.Piece):
 
         # 2 gauche 1 bas
 
-        if row + 1 < constants.row and column - 2 >= 0:
+        if row + 1 < constants.row and column >= 2:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row + 1, column - 2)
             if self.color is not piece.color:
-
                 self.available_moves.append([row + 1, column - 2])
                 available_moves_by_direction.append([row + 1, column - 2])
 

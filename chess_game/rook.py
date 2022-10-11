@@ -38,15 +38,14 @@ class Rook(pieces.Piece):
                     available_moves_by_direction.append([row_down, column])
                     break
 
-                elif self.color is piece.color:
-
+                else:
                     break
 
             self.available_moves_by_direction.append(available_moves_by_direction)
 
         # ajoute les cases au dessus de la tours jusqu'a ce qu'une autre piece sois trouvée
 
-        if row - 1 >= 0:
+        if row >= 1:
 
             available_moves_by_direction = []
             for row_up in range(row - 1, -1, -1):
@@ -64,8 +63,7 @@ class Rook(pieces.Piece):
                     available_moves_by_direction.append([row_up, column])
                     break
 
-                elif self.color is piece.color:
-
+                else:
                     break
 
             self.available_moves_by_direction.append(available_moves_by_direction)
@@ -88,15 +86,14 @@ class Rook(pieces.Piece):
                     available_moves_by_direction.append([row, column_right])
                     break
 
-                elif self.color is piece.color:
-
+                else:
                     break
 
             self.available_moves_by_direction.append(available_moves_by_direction)
 
         # ajoute les cases a gauche de la tours jusqu'a ce qu'une autre piece sois trouvée
 
-        if column - 1 >= 0:
+        if column >= 1:
 
             available_moves_by_direction = []
             for column_left in range(column - 1, -1, -1):
@@ -113,8 +110,7 @@ class Rook(pieces.Piece):
                     available_moves_by_direction.append([row, column_left])
                     break
 
-                elif self.color is piece.color:
-
+                else:
                     break
 
             self.available_moves_by_direction.append(available_moves_by_direction)
