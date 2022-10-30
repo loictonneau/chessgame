@@ -1,7 +1,7 @@
-from chess_game import constants
+from chess_game import constants, pieces
 
 
-def draw_board(list: list) -> None:
+def draw_board(list: list):
     """affiche les pieces sur un echequier"""
 
     board = []

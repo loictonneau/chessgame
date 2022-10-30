@@ -22,7 +22,7 @@ class King(pieces.Piece):
 
         # avance d'une case sur la gauche
 
-        if column >= 1:
+        if column - 1 >= 0:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row, column - 1)
@@ -35,7 +35,7 @@ class King(pieces.Piece):
 
         # avance d'une case sur le diagonal haut gauche
 
-        if row >= 1 and column >= 1:
+        if row - 1 >= 0 and column - 1 >= 0:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row - 1, column - 1)
@@ -48,7 +48,7 @@ class King(pieces.Piece):
 
         # avance d'une case vers le haut
 
-        if row >= 1:
+        if row - 1 >= 0:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row - 1, column)
@@ -61,7 +61,7 @@ class King(pieces.Piece):
 
         # avance d'une case sur le diagonal haut droite
 
-        if row >= 1 and column + 1 < constants.column:
+        if row - 1 >= 0 and column + 1 < constants.column:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row - 1, column + 1)
@@ -113,7 +113,7 @@ class King(pieces.Piece):
 
         # avance d'une case sur le diagonal bas gauche
 
-        if row + 1 < constants.row and column >= 1:
+        if row + 1 < constants.row and column - 1 >= 0:
 
             available_moves_by_direction = []
             piece = utils.find_piece(list_pieces, row + 1, column - 1)

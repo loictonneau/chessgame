@@ -1,4 +1,3 @@
-import itertools
 from chess_game import utils, pieces, pawn, rook, knight, bishop, queen, king, board, constants
 
 
@@ -30,80 +29,87 @@ class Game:
 
         # place les piece en debut de partie
 
-        for each_row, each_case in itertools.product(range(constants.column), range(constants.row)):
-            if each_case in [0, 7]:
+        for each_row in range(constants.column):
+
+            for each_case in range(constants.row):
+
+                # placement des pieces noirs
+
                 if each_row == 0:
 
-                    self.piece_list.append(rook.Rook("rook", "black", [each_row, each_case]))
+                    if each_case == 0 or each_case == 7:
 
-            elif each_case in [1, 6]:
-                if each_row == 0:
+                        self.piece_list.append(rook.Rook("rook", "black", [each_row, each_case]))
 
-                    self.piece_list.append(knight.Knight("knight", "black", [each_row, each_case]))
+                    elif each_case == 1 or each_case == 6:
 
-            elif each_case in [2, 5]:
-                if each_row == 0:
+                        self.piece_list.append(knight.Knight("knight", "black", [each_row, each_case]))
 
-                    self.piece_list.append(bishop.Bishop("bishop", "black", [each_row, each_case]))
+                    elif each_case == 2 or each_case == 5:
 
-            elif each_case == 3:
-                if each_row == 0:
+                        self.piece_list.append(bishop.Bishop("bishop", "black", [each_row, each_case]))
 
-                    self.piece_list.append(queen.Queen("queen", "black", [each_row, each_case]))
+                    elif each_case == 3:
 
-            elif each_case == 4:
-                if each_row == 0:
+                        self.piece_list.append(queen.Queen("queen", "black", [each_row, each_case]))
 
-                    self.piece_list.append(king.King("king", "black", [each_row, each_case]))
+                    elif each_case == 4:
 
-            # placement des pions noirs
+                        self.piece_list.append(king.King("king", "black", [each_row, each_case]))
 
-            if each_row == 1:
+                # placement des pions noirs
 
-                self.piece_list.append(pawn.Pawn("pawn", "black", [each_row, each_case]))
+                if each_row == 1:
 
-            # placement des cases vides
+                    self.piece_list.append(pawn.Pawn("pawn", "black", [each_row, each_case]))
 
-            if 2 <= each_row <= 5:
+                # placement des cases vides
 
-                self.piece_list.append(pieces.Piece(None, None, [each_row, each_case]))
+                if 2 <= each_row <= 5:
 
-            # placement des pions blancs
+                    self.piece_list.append(pieces.Piece(None, None, [each_row, each_case]))
 
-            if each_row == 6:
+                # placement des pions blancs
 
-                self.piece_list.append(pawn.Pawn("pawn", "white", [each_row, each_case]))
+                if each_row == 6:
+
+                    self.piece_list.append(pawn.Pawn("pawn", "white", [each_row, each_case]))
 
                 # placement des pieces blanches
 
-            if each_row == 7:
+                if each_row == 7:
 
-                if each_case in [0, 7]:
+                    if each_case == 0 or each_case == 7:
 
-                    self.piece_list.append(rook.Rook("rook", "white", [each_row, each_case]))
+                        self.piece_list.append(rook.Rook("rook", "white", [each_row, each_case]))
 
-                elif each_case in [1, 6]:
+                    elif each_case == 1 or each_case == 6:
 
-                    self.piece_list.append(knight.Knight("knight", "white", [each_row, each_case]))
+                        self.piece_list.append(knight.Knight("knight", "white", [each_row, each_case]))
 
-                elif each_case in [2, 5]:
+                    elif each_case == 2 or each_case == 5:
 
-                    self.piece_list.append(bishop.Bishop("bishop", "white", [each_row, each_case]))
+                        self.piece_list.append(bishop.Bishop("bishop", "white", [each_row, each_case]))
 
-                elif each_case == 3:
+                    elif each_case == 3:
 
-                    self.piece_list.append(queen.Queen("queen", "white", [each_row, each_case]))
+                        self.piece_list.append(queen.Queen("queen", "white", [each_row, each_case]))
 
-                elif each_case == 4:
+                    elif each_case == 4:
 
-                    self.piece_list.append(king.King("king", "white", [each_row, each_case]))
+                        self.piece_list.append(king.King("king", "white", [each_row, each_case]))
 
     # bouge les pieces
 
     def select_piece(self, position: list[int, int]) -> (pieces.Piece, None):
         """selectionne une pièce en fonction de sa position et montre ces coups possibles"""
 
-        if position[0] not in range(constants.row) or position[1] not in range(constants.column) or len(position) != 2:
+        if not (
+
+                position[0] in range(0, constants.row)
+                and position[1] in range(0, constants.column)
+
+        ) or len(position) != 2:
 
             print("coordonnées non valide")
 
@@ -134,9 +140,12 @@ class Game:
     def select_destination(self, destination: list[list[int, int]]) -> (pieces.Piece, None):
         """selectionne une case vide"""
 
-        if destination[0] not in range(constants.row)\
-                or destination[1] not in range(constants.column) \
-                or len(destination) != 2:
+        if not (
+
+                destination[0] in range(0, constants.row)
+                and destination[1] in range(0, constants.column)
+
+        ) or len(destination) != 2:
 
             return print("coordonnées non valide")
 
@@ -147,6 +156,9 @@ class Game:
         else:
 
             return destination
+
+    def simulation_move(self, piece: pieces.Piece, destination: list[list[int, int]]) -> bool:
+        return True
 
     def move(self, piece: pieces.Piece, destination: list[int, int]) -> bool:
         """deplace la piece"""
@@ -174,7 +186,13 @@ class Game:
     def change_turn(self):
         """passe a joueur suivant"""
 
-        self.turn = "black" if self.turn == "white" else "white"
+        if self.turn == "white":
+
+            self.turn = "black"
+
+        else:
+
+            self.turn = "white"
 
     def piece_die(self, piece_to_remove: pieces.Piece):
         """enleve 1 au compte restant du nombre de pieces"""
@@ -229,7 +247,10 @@ class Game:
             if piece.color != self.turn and piece.type is not None:
 
                 enemie_available_moves = piece.get_available_moves(self.piece_list)[0]
-                enemies_available_moves.extend(iter(enemie_available_moves))
+                for enemie_available_move in enemie_available_moves:
+
+                    enemies_available_moves.append(enemie_available_move)
+
         return enemies_available_moves
 
     def get_all_possible_moves(self) -> dict[(list[int, int]), pieces.Piece]:
@@ -249,7 +270,7 @@ class Game:
 
     def get_threatening_enemies(self) -> list[pieces.Piece]:
         """cree une liste avec les pieces metant le roi en echec"""
-        player_king = self.find_king()
+        king = self.find_king()
         threatening_enemies = []
 
         for piece in self.piece_list:
@@ -257,10 +278,11 @@ class Game:
             if piece.color != self.turn and piece.type is not None:
 
                 enemie_available_moves = piece.get_available_moves(self.piece_list)[0]
-                threatening_enemies.extend(
-                    piece for enemie_available_move in enemie_available_moves
-                    if player_king.position in enemie_available_move
-                )
+                for enemie_available_move in enemie_available_moves:
+
+                    if king.position in enemie_available_move:
+
+                        threatening_enemies.append(piece)
 
         return threatening_enemies
 
@@ -310,8 +332,9 @@ class Game:
             if self.turn == "white":
 
                 print("Black wins")
+                return True
+
             else:
 
                 print("White wins")
-
-            return True
+                return True
